@@ -18,7 +18,7 @@ jobs:
           override: true
           components: rustfmt, clippy
       - run: cargo fmt --manifest-path server/Cargo.toml
-      - run: cargo clippy --manifest-path server/Cargo.toml --fix
+      - run: cargo clippy --manifest-path server/Cargo.toml --fix --allow-dirty
       - run: cargo test --manifest-path server/Cargo.toml
       - uses: EndBug/add-and-commit@v7
         with:
