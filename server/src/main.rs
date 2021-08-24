@@ -1,10 +1,7 @@
 #[macro_use] extern crate rocket;
-
-mod api;
-use api::*;
+use server::config;
 
 #[launch]
-fn rocket() -> _ {
-    rocket::build()
-        .mount("/", routes![index])
+pub fn rocket() -> _ {
+    config()
 }
