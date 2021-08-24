@@ -1,0 +1,19 @@
+name: Test App
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  Build and test the server
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo "Testing the application from the branch ${{github.ref}} on a ${{runner.os}}"
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - run: echo "The ${{github.repository}} repository has been cloned to the runner."
+    - run: echo "The workflow is now ready to test your code."
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+    - run: cargo test
