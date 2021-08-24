@@ -1,5 +1,5 @@
 use cucumber_rust::{async_trait, Context, Cucumber, World};
-use rocket::local::asynchronous::{Client};
+use rocket::local::asynchronous::Client;
 use std::convert::Infallible;
 
 use server;
@@ -8,7 +8,7 @@ mod steps;
 
 pub enum MyWorld {
     Nothing,
-    TextResponse(String)
+    TextResponse(String),
 }
 
 #[async_trait(?Send)]
@@ -23,9 +23,10 @@ impl World for MyWorld {
 #[tokio::main]
 async fn main() {
     let rocket = server::config();
-    let client = Client::tracked(rocket).await
+    let client = Client::tracked(rocket)
+        .await
         .expect("valid rocket instance");
-    
+
     Cucumber::<MyWorld>::new()
         .features(&["./features"])
         .steps(steps::index::steps())

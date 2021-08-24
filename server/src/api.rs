@@ -4,6 +4,4 @@ pub fn index() -> &'static str {
 }
 
 #[cfg(test)]
-mod tests {
-    
-}
+mod tests {}

@@ -15,7 +15,13 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
-      - uses: actions-rs/cargo@v1
+          override: true
+          components: rustfmt, clippy
+      - run: cargo fmt --manifest-path server/Cargo.toml
+      - run: cargo check --manifest-path server/Cargo.toml
+      - run: cargo test --manifest-path server/Cargo.toml
+      - uses: EndBug/add-and-commit@v7
         with:
-          command: test
-          args: --manifest-path server/Cargo.toml
+          user_name: Reformatting Bot
+          user_email: maxbmhlee@gmail.com
+          message: Reformatted Code
